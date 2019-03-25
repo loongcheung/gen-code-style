@@ -1,0 +1,91 @@
+{
+	"name": "gcs",
+	"displayName": "gen-code-style",
+	"description": "Generate uniform code",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.gsc.menusGenCodeStyle",
+		"onCommand:extension.gsc.cmdGenCodeStyle"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.gsc.cmdGenCodeStyle",
+				"title": "gen preject"
+			},
+			{
+				"command": "extension.gsc.menusGenCodeStyle",
+				"title": "快速生成代码"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "extension.gsc.menusGenCodeStyle",
+					"when": "explorerResourceIsFolder",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": [
+			{
+				"type": "object",
+				"title": "GenCodeStyle configuration",
+				"properties": {
+					"GenCodeStyle.folders": {
+						"type": "object",
+						"default": {
+							"store": false,
+							"view": false,
+							"config": false,
+							"utils": false,
+							"helpers": false,
+							"constants": true,
+							"components": true
+						},
+						"description": "默认创建的文件夹"
+					},
+					"GenCodeStyle.files": {
+						"type": " object",
+						"default": {
+							"main.js": true,
+							"App.vue": true,
+							"router.js": false
+						},
+						"description": "默认创建的文件"
+					}
+				}
+			}
+		],
+		"configurationDefaults": {}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^5.0.5",
+		"@types/lodash": "^4.14.123",
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^10.12.21",
+		"@types/nunjucks": "^3.1.1",
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28"
+	},
+	"dependencies": {
+		"fs-extra": "^7.0.1",
+		"lodash": "^4.17.11",
+		"nunjucks": "^3.2.0"
+	}
+}
